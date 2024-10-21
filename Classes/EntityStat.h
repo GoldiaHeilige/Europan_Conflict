@@ -16,6 +16,7 @@ public:
     float _currentAmmo;  // Current weapon ammo
     float _currentMag;   // Total ammo of the mag 
     float _totalAmmo;    // Total ammo of current weapon
+    std::string _shootSFX;
 
     // Use an int to represent the current weapon type
     int _currentWeapon; // Instead of WeaponManager::WeaponType
@@ -23,7 +24,8 @@ public:
 
     EntityStat()
         : _hp(0), _armor(0), _spd(0), _atk(0),
-        _currentAmmo(0), _currentMag(0), _totalAmmo(0), _currentWeapon(0), _weaponStats(nullptr) {}
+        _currentAmmo(0), _currentMag(0), _totalAmmo(0),
+        _currentWeapon(0), _weaponStats(nullptr) {}
 
     ~EntityStat() { delete _weaponStats; }
 

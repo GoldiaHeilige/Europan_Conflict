@@ -29,6 +29,7 @@ bool KeyboardInput::init() {
 	this->addKey(EventKeyboard::KeyCode::KEY_UP_ARROW);
 	this->addKey(EventKeyboard::KeyCode::KEY_R);
 	this->addKey(EventKeyboard::KeyCode::KEY_1);
+	this->addKey(EventKeyboard::KeyCode::KEY_2);
 
 	// event keyboard
 	auto listener = EventListenerKeyboard::create();
@@ -96,6 +97,17 @@ void KeyboardInput::onKeyPressed(EventKeyboard::KeyCode key, Event* ev) {
 		else {
 			weaponManager->setCurrentWeapon(WeaponManager::WeaponType::PISTOL);
 			CCLOG("Switched to PISTOL.");
+		}
+		break;
+		}
+	case EventKeyboard::KeyCode::KEY_2: {
+		auto weaponManager = WeaponManager::getInstance();
+		if (weaponManager->getCurrentWeapon() == WeaponManager::WeaponType::ASSAULT_RIFLE) {
+			CCLOG("Rifle is already in use.");
+		}
+		else {
+			weaponManager->setCurrentWeapon(WeaponManager::WeaponType::ASSAULT_RIFLE);
+			CCLOG("Switched to RIFLE.");
 		}
 		break;
 	}

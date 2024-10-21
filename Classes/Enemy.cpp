@@ -67,9 +67,5 @@ void Enemy::die()
 
 void Enemy::update(float dt)
 {
-	/*Vec2 direction;
-	direction.x = 1;
-	direction.y = 0;
-	if (direction.x != 0) this->setScaleX(direction.x);
-	this->setPosition(this->getPosition() + direction * _entityStat->_spd);*/
+
 }

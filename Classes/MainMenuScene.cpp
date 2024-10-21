@@ -104,7 +104,7 @@ bool MainMenuScene::init()
     * 
     **********/
 
-    _background = Sprite::create("Map/LocationPortraits/MainMenu1.png");
+    _background = Sprite::create("Map/LocationPortraits/War.png");
     _background->setPosition(visibleSize.width / 1.5, visibleSize.height / 2);
     _background->setContentSize(visibleSize);
     this->addChild(_background, 0);
@@ -118,13 +118,13 @@ bool MainMenuScene::init()
     _background->runAction(menuRepeat);
 
     auto MainMenuVignette = Sprite::create("UI/MainMenuVignette.png");
-    MainMenuVignette->setPosition(visibleSize.width / 4.5, visibleSize.height / 2);
-    MainMenuVignette->setScale(0.3);
+    MainMenuVignette->setPosition(visibleSize.width / 4.3, visibleSize.height / 2);
+    MainMenuVignette->setScale(0.5);
     this->addChild(MainMenuVignette, 1);
 
-    auto gameTitle = Sprite::create("UI/titleText.png", Rect(20, 720, 1300, 350));;
-    gameTitle->setPosition(visibleSize.width / 1.41, 125);
-    gameTitle->setScale(0.5);
+    auto gameTitle = Sprite::create("UI/titleText.png", Rect(20, 560, 1300, 350));;
+    gameTitle->setPosition(visibleSize.width / 1.2, 100);
+    gameTitle->setScale(0.6);
     this->addChild(gameTitle, 20);
 
     return true;

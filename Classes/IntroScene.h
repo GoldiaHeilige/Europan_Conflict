@@ -5,6 +5,13 @@
 #include "cocos2d.h"
 #include "Character.h"
 #include "WeaponManager.h"
+#include "UILayer/UIManager.h"
+#include "MainMenuScene.h"
+#include "KeyboardInput.h"
+#include "Enemy.h"
+#include "Bullet.h"
+#include "SpawnObjects.h"
+#include "IDamageable.h"
 
 using namespace cocos2d;
 
@@ -17,8 +24,6 @@ public:
 private:
     void onMouseMove(Event* event);
     void onMouseDown(Event* event);
-    void onExit() override;
-    void onEnter() override;
 
     cocos2d::TMXTiledMap* _map;
     cocos2d::TMXObjectGroup* _objectsCar;

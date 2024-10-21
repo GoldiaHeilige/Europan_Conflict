@@ -18,15 +18,10 @@ bool SplashScene::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto MainMenu1 = Sprite::create("Map/LocationPortraits/MainMenu1.png");
-    MainMenu1->setPosition(visibleSize.width / 1.5, visibleSize.height / 2);
+    auto MainMenu1 = Sprite::create("Map/LocationPortraits/War.png");
+    MainMenu1->setPosition(visibleSize / 2);
     MainMenu1->setContentSize(visibleSize);
     this->addChild(MainMenu1, 0);
-
-    auto MainMenuVignette = Sprite::create("UI/MainMenuVignette.png");
-    MainMenuVignette->setPosition(visibleSize.width / 4.5, visibleSize.height / 2);
-    MainMenuVignette->setScale(0.3);
-    this->addChild(MainMenuVignette, 1);
 
     auto labelSystemFont = Label::createWithSystemFont("LOADING...", "Roboto-Thin", 48);
     labelSystemFont->setPosition(Vec2(visibleSize / 2));

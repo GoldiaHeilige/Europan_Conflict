@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "EntityStat.h"
+#include "UILayer/UIManager.h"
+#include "AudioManager/AudioManager.h"
 
 using namespace cocos2d;
 
@@ -25,7 +27,7 @@ public:
     void reload();
 
 private:
-    WeaponType _currentWeapon = WeaponType::PISTOL; // Initialize with default weapon
+    WeaponType _currentWeapon = WeaponType::PISTOL;
     EntityStat* _currentWeaponStats = nullptr; // Initialize pointer to nullptr
     void initializeWeapons();
 

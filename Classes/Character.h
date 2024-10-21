@@ -22,14 +22,12 @@ public:
     void shoot(Vec2 direction);
     void attack();
     void switchWeapon(WeaponManager::WeaponType newWeaponType);
-    void updateAmmoDisplay();
 
 private:
     void die();
     void onEnter();
     void update(float dt);
     EntityStat* _stat;
-    Label* _ammoLabel;
     WeaponManager _weaponManager;
 };
 

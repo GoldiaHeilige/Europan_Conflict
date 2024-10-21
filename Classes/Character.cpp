@@ -24,13 +24,6 @@ bool Character::init(EntityInfo* info, EntityStat* entityStat)
     characterBody->setContactTestBitmask(true);
     this->addComponent(characterBody);
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    _ammoLabel = Label::createWithTTF("0 / 0", "fonts/Marker Felt.ttf", 24);
-    //_ammoLabel->setPosition(visibleSize.width - _ammoLabel->getContentSize().width / 2 - 10, 20); // Bottom-right corner
-    _ammoLabel->setPosition(visibleSize / 2);
-    this->addChild(_ammoLabel, 100);
-
-    this->scheduleUpdate();
     return true;
 }
 
@@ -79,7 +72,6 @@ void Character::shoot(Vec2 direction) {
 void Character::switchWeapon(WeaponManager::WeaponType newWeaponType) {
     WeaponManager::getInstance()->setCurrentWeapon(newWeaponType);
     _stat->_weaponStats = WeaponManager::getInstance()->getCurrentWeaponStats(); // Update weapon stats
-    updateAmmoDisplay();
 }
 
 void Character::attack() {
@@ -110,12 +102,4 @@ void Character::onEnter()
 void Character::update(float dt)
 {
 
-}
-
-void Character::updateAmmoDisplay() {
-    if (_stat && _stat->_weaponStats) {
-        // Update the label text with current ammo and total ammo
-        std::string ammoText = StringUtils::format("%d / %d", static_cast<int>(_stat->_weaponStats->_currentAmmo), static_cast<int>(_stat->_weaponStats->_totalAmmo));
-        _ammoLabel->setString(ammoText);
-    }
 }

@@ -52,22 +52,20 @@ void Bullet::fire(Vec2 direction)
 
 bool Bullet::onContactBegin(PhysicsContact& contact)
 {
-	// Get the nodes involved in the collision
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
 
-	// Identify which node is the bullet
 	auto bullet = (nodeA == this) ? nodeA : (nodeB == this) ? nodeB : nullptr;
 	auto target = (nodeA == this) ? nodeB : nodeA;
 
-	// Proceed only if the bullet is valid and target is present
 	if (bullet && target) {
 		CCLOG("Bullet collided with target: %s", typeid(*target).name());
 
-		// If the target is damageable (like an enemy), apply damage
+		float attackDamage = WeaponManager::getInstance()->getCurrentWeaponStats()->_atk;
+
 		if (auto damageable = dynamic_cast<IDamageable*>(target)) {
-			CCLOG("Enemy hit! Dealing damage: %d", _entity->getEntityStat()->_atk);
-			damageable->takeDame(_entity->getEntityStat()->_atk);
+			CCLOG("Enemy hit! Dealing damage: %f", attackDamage);
+			damageable->takeDame(attackDamage);
 		}
 
 		this->removeFromParentAndCleanup(true);

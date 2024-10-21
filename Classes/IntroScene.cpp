@@ -1,14 +1,4 @@
 ﻿#include "IntroScene.h"
-#include "MainMenuScene.h"
-#include "audio/include/AudioEngine.h"
-#include "cocos2d.h"
-#include "KeyboardInput.h"
-#include "Enemy.h"
-#include "Bullet.h"
-#include "SpawnObjects.h"
-#include "IDamageable.h"
-
-int _gameMusicAudio = -1;
 
 Scene* IntroScene::createIntroScene()
 {
@@ -40,7 +30,7 @@ bool IntroScene::init()
     enemy1Info->_name = "Enemy4_Rifle";
 
     auto stat2 = new EntityStat();
-    stat2->_spd = 3;
+    stat2->_spd = 10;
     stat2->_hp = 100;
     stat2->_atk = 50;
 
@@ -48,7 +38,17 @@ bool IntroScene::init()
     heroStat->_spd = 3;
     heroStat->_hp = 100;
     WeaponManager* weaponManager = WeaponManager::getInstance();
+
+    if (heroStat->_weaponStats) {
+        delete heroStat->_weaponStats; 
+    }
     heroStat->_weaponStats = weaponManager->getCurrentWeaponStats();
+
+    // Ensure ammo stats are synchronized with the weapon manager
+    heroStat->_currentAmmo = weaponManager->getCurrentWeaponStats()->_currentAmmo;
+    heroStat->_totalAmmo = weaponManager->getCurrentWeaponStats()->_totalAmmo;
+    heroStat->_currentMag = weaponManager->getCurrentWeaponStats()->_currentMag;
+    CCLOG("EntityStat Ammo: %f, WeaponManager Ammo: %f", heroStat->_currentAmmo, WeaponManager::getInstance()->getCurrentWeaponStats()->_currentAmmo);
 
     auto enemy2 = Enemy::create(enemy1Info, stat2);
     auto hero = Character::create(charInfo, heroStat);
@@ -58,6 +58,10 @@ bool IntroScene::init()
     _character->setName("Hero");
     this->addChild(_character);
     this->addChild(KeyboardInput::getInstance());
+
+    auto uiManager = UIManager::getInstance();
+    uiManager->setCharacterNode(_character); 
+    this->addChild(uiManager);
 
     enemy2->setPosition(visibleSize / 2);
     enemy2->setName("Enemy Rifle Soldier");
@@ -140,18 +144,3 @@ void IntroScene::onMouseDown(Event* event) {
 //    this->addChild(bullet);
 //    bullet->fire(direction);
 //}
-
-void IntroScene::onExit()
-{
-    Scene::onExit();
-    AudioEngine::stop(_gameMusicAudio);
-}
-
-void IntroScene::onEnter()
-{
-    Scene::onEnter();
-    if (_gameMusicAudio == -1 || AudioEngine::getState(_gameMusicAudio) != AudioEngine::AudioState::PLAYING) {
-        _gameMusicAudio = AudioEngine::play2d("Sounds/Music/Wartrauma.ogg", true, 0.6);
-    }
-}
-
